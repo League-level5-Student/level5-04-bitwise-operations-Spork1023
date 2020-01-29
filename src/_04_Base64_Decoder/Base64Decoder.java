@@ -59,11 +59,11 @@ public class Base64Decoder {
 	public static byte[] convert4CharsTo24Bits(String s){
 		byte[] ret = new byte[3];
 		
-		ret[0] = (byte) ((byte) (convertBase64Char(s.charAt(0)) & 0x3F | convertBase64Char(s.charAt(1)) & 0x03) <<6);
+		ret[0] = (byte) ((byte) (convertBase64Char(s.charAt(0)) & 0x3F) | (convertBase64Char(s.charAt(1)) & 0x03) <<6);
 		System.out.println(ret[0]);
-		ret[1] = (byte) (convertBase64Char(s.charAt(1)) & 0x3C | convertBase64Char(s.charAt(2)) & 0x07);
+		ret[1] = (byte) ((byte) convertBase64Char(s.charAt(1)) >>2 | (convertBase64Char(s.charAt(2)) & 0x0F) <<4);
 		System.out.println(ret[1]);
-		ret[2] = (byte) (convertBase64Char(s.charAt(2)) & 0x30 | convertBase64Char(s.charAt(3)) & 0x3F);
+		ret[2] = (byte) ((byte) convertBase64Char(s.charAt(2)) >>4 | (convertBase64Char(s.charAt(3))) <<2);
 		System.out.println(ret[2]);
 		
 		return ret;
